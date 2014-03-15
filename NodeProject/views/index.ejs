@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= title %></title>
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+	<h1><%= title %></h1>
+	<p>Welcome to <%= title %></p>
+
+	<form action="/" method="post">
+		
+		<label for="usrn">Username</label>
+		<input id="usrn" type="text" name="username" />
+		<br>
+		<label for="pwd">Password</label>
+		<input id="pwd" type="password" name="password"/>
+		<br>
+		<input type="submit" value="Create Account">
+
+	</form>
+
+	<% if (locals.username) { %>
+		Hello <%= username %>
+		Identified by <%= password %>
+	<% } %>
+
+</body>
+</html>
