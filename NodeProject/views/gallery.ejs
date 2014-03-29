@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= title %></title>
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+	<h1><%= title %></h1>
+	
+	<form action="/gallery-upload" method="post" enctype="multipart/form-data">
+	
+		<input type="file" name="image" />
+		<input type="submit" accept="image/*" value="upload" />
+	
+	</form>
+
+	<% if (locals.msg) { %>
+		<%= msg %>
+	<% } %>
+</body>
+</html>

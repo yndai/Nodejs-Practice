@@ -6,7 +6,7 @@ var USER_INSERT_QUERY = 'INSERT INTO Users (name,password,admin) VALUES (?, SHA1
 var USER_FIND_QUERY = 'SELECT';
 
 //TODO: add update functionality?
-var addUser = function(usr, callback){
+function addUser(usr, callback){
 	
 	pool.getConnection( function(err, cxn){
 		if (err) {
@@ -16,7 +16,7 @@ var addUser = function(usr, callback){
 		var queryAttrs = [usr.name, usr.password, usr.admin.toString()];
 		var q = cxn.query(USER_INSERT_QUERY, queryAttrs, function(err, result) {
 			if (err) {
-				console.log('DB Error: ' + err)
+				console.log('DB Error: ' + err);
 				callback(err);
 			} else {
 				console.log('User ' + usr.name + ' persisted');
@@ -26,15 +26,15 @@ var addUser = function(usr, callback){
 		});
 		console.log(q.sql);
 	});
-};
+}
 
-var getUser = function(name, pwd){
+function getUser(name, pwd){
 	
-};
+}
 
-var verifyUser = function(name, pwd){
+function verifyUser(name, pwd){
 	
-};
+}
 
 var user_mgr = {
 	addUser : addUser

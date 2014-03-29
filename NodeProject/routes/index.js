@@ -11,7 +11,7 @@ app.get('/index', function(req, res, next){
 
 });
 
-// require each route  js file
+// require each route js file
 require('fs').readdirSync(__dirname + '/').forEach(function(file){
 	if (file.match(/.+\.js/) !== null && file !== 'index.js'){
 		require('./' + file);
