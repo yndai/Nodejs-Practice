@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= title %></title>
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+	<h1>Register for an account</h1>
+	<br>
+	<form action="/register" method="post">
+		
+		<label for="usrn">Username</label>
+		<input id="usrn" type="text" name="username" />
+		<br>
+		<label for="pwd">Password</label>
+		<input id="pwd" type="password" name="password"/>
+		<br>
+		<input type="submit" value="Create Account">
+
+	</form>
+	<br>
+	
+	<% if (locals.error) { %>
+		<span style="color:red"><%= error %></span>
+	<% } else if (locals.success) { %>
+		<span style="color:green"><%= success %></span>
+	<% } %>
+	
+</body>
+</html>

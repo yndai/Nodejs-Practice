@@ -5,7 +5,8 @@ var mysql = require('mysql');
 var USER_INSERT_QUERY = 'INSERT INTO Users (name,password,admin) VALUES (?, SHA1(?), ?)';
 var USER_FIND_QUERY = 'SELECT';
 
-var addOrUpdate = function(usr, callback){
+//TODO: add update functionality?
+var addUser = function(usr, callback){
 	
 	pool.getConnection( function(err, cxn){
 		if (err) {
@@ -27,8 +28,16 @@ var addOrUpdate = function(usr, callback){
 	});
 };
 
+var getUser = function(name, pwd){
+	
+};
+
+var verifyUser = function(name, pwd){
+	
+};
+
 var user_mgr = {
-	addOrUpdate : addOrUpdate
+	addUser : addUser
 		
 		
 };
