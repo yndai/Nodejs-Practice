@@ -1,30 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title><%= title %></title>
-	<link rel='stylesheet' href='/stylesheets/style.css' />
-</head>
-<body>
-	<h1><%= title %></h1>
-	
-	<form action="/gallery-upload" method="post" enctype="multipart/form-data">
-	
-		<input type="file" name="image" />
-		<input type="submit" accept="image/*" value="upload" />
-	
-	</form>
 
-	<% if (locals.msg) { %>
-		<%= msg %>
+<% include wrapper/header.ejs %>
+
+<form action="/gallery-upload" method="post" enctype="multipart/form-data">
+
+	<input type="file" name="image" />
+	<input type="submit" accept="image/*" value="upload" />
+
+</form>
+
+<% if (locals.msg) { %>
+	<%= msg %>
+<% } %>
+
+<div>
+	<% if (locals.imageList) { %>
+	<% for (var i = 0; i < imageList.length; i++){ %>
+		<img border="2" src="<%= imageList[i] %>" width="500" height="500">
 	<% } %>
+	<% } %>
+</div>
 	
-	<div>
-		<% if (locals.imageList) { %>
-		<% for (var i = 0; i < imageList.length; i++){ %>
-			<img border="2" src="<%= imageList[i] %>" width="500" height="500">
-		<% } %>
-		<% } %>
-	</div>
-	
-</body>
-</html>
+<% include wrapper/footer.ejs %>
