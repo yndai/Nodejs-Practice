@@ -19,7 +19,12 @@
 <section><div id="wet-fullhd">
 <div id="wet-fullhd-in">
 	<ul>
-		<li><a style="display:block;padding-right:15px;" href="#">Login</a></li>
+		<% if (req.session && req.session.user) { %>
+			<li><p style="display:block;padding-right:15px;">Welcome, <%= req.session.user %></p></li>
+			<li><a style="display:block;padding-right:15px;" href="/logout">Logout</a></li>
+		<% } else { %>
+			<li><a style="display:block;padding-right:15px;" href="/login">Login</a></li>
+		<% } %>
 		<li><a style="display:block;padding-right:15px;" href="/register">Register</a></li>
 	</ul>
 </div>
@@ -54,5 +59,11 @@
 <!-- MainContentStart -->
 
 	<h1><%= title %></h1>
+	
+	<% if (locals.error) { %>
+		<span style="color:red"><%= error %></span>
+	<% } else if (locals.success) { %>
+		<span style="color:green"><%= success %></span>
+	<% } %>
 	
 <!-- HEADER.EJS END -->

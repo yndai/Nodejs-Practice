@@ -34,6 +34,7 @@ function listImages(){
 
 app.get('/gallery', function(req, res, next){
 	var data = {title : 'Image Gallery',
+				req : req,
 				imageList : listImages()};
 	res.render('gallery', data);
 
@@ -42,7 +43,6 @@ app.get('/gallery', function(req, res, next){
 app.post('/gallery-upload', function(req, res, next){
 	
 	if (req.files.image && req.files.image.type.match(/image\/\s*/)){
-		console.log("ok1");
 		var tmpPath = req.files.image.path;
 		
 		var targetName = getTimestamp() + "-" + req.files.image.name;
@@ -57,16 +57,16 @@ app.post('/gallery-upload', function(req, res, next){
 					if (err) throw err;
 				});
 			}
-			
 			var data = {title : 'Image Gallery',
+						req : req,
 						msg : 'File uploaded',
 						imageList : listImages()};
 			res.render('gallery', data);
 		});
 		
-		
 	} else {
 		var data = {title : 'Image Gallery',
+					req : req,
 					msg : 'File missing or incorrect type',
 					imageList : listImages()};
 		res.render('gallery', data);
