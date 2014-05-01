@@ -40,7 +40,7 @@ app.get('/gallery', function(req, res, next){
 
 });
 
-app.post('/gallery-upload', function(req, res, next){
+app.post('/gallery', function(req, res, next){
 	
 	if (req.files.image && req.files.image.type.match(/image\/\s*/)){
 		var tmpPath = req.files.image.path;
@@ -59,7 +59,7 @@ app.post('/gallery-upload', function(req, res, next){
 			}
 			var data = {title : 'Image Gallery',
 						req : req,
-						msg : 'File uploaded',
+						success : 'File uploaded',
 						imageList : listImages()};
 			res.render('gallery', data);
 		});
@@ -67,7 +67,7 @@ app.post('/gallery-upload', function(req, res, next){
 	} else {
 		var data = {title : 'Image Gallery',
 					req : req,
-					msg : 'File missing or incorrect type',
+					error : 'File missing or incorrect type',
 					imageList : listImages()};
 		res.render('gallery', data);
 	}

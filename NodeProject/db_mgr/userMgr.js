@@ -34,9 +34,12 @@ function getUser(name, pwd, callback){
 	
 		var queryAttrs = [name, pwd];
 		var q = cxn.query(USER_FIND_QUERY, queryAttrs, function(err, rows) {
-			if (err || rows.length != 1) {
+			if (err) {
 				console.log('DB Error: ' + err);
 				callback(err);
+			} else if (rows.length != 1) {
+				console.log('Error: user not found');
+				callback('User not found');
 			} else {
 				console.log('Select complete');
 				callback(err, rows[0]);

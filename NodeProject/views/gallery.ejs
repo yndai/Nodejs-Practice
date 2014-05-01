@@ -1,7 +1,7 @@
 
 <% include wrapper/header.ejs %>
 
-<form action="/gallery-upload" method="post" enctype="multipart/form-data">
+<form action="/gallery" method="post" enctype="multipart/form-data">
 
 	<input type="file" name="image" />
 	<input type="submit" accept="image/*" value="upload" />
@@ -14,10 +14,17 @@
 
 <div>
 	<% if (locals.imageList) { %>
-	<% for (var i = 0; i < imageList.length; i++){ %>
-		<img border="2" src="<%= imageList[i] %>" width="500" height="500">
+	<div class="gallery">
+	<% for (var i = 0; i < imageList.length; i++){ %>		
+	    <div class="galleryItem">
+	        <a href="<%= imageList[i] %>"><img src="<%= imageList[i] %>" alt=""></a>
+	        <h3>Title</h3>
+	    </div>
 	<% } %>
+	</div>
 	<% } %>
 </div>
 	
+
+
 <% include wrapper/footer.ejs %>
