@@ -8,4 +8,6 @@ var db_connect = {
 	password : 'db'
 };
 
+// TODO: automatically create database if dosen't exist?
+
 module.exports = mysql.createPool(db_connect);
