@@ -36,7 +36,7 @@ function getDate(){
 	return year + '-' + month + '-' + day;
 }
 
-function listImages(){
+function listFolderImages(){
 	var arr = [];
 	fs.readdirSync("public/images").forEach( function(file){
 		arr.push("/images/" + file);
@@ -44,12 +44,17 @@ function listImages(){
 	return arr;
 }
 
+function render(req, res, data) {
+	image_mgr.listImages(function(err, rows){
+		data.imageList = rows;
+		res.render('gallery', data);
+	});
+}
+
 app.get('/gallery', function(req, res, next){
 	var data = {title : 'Image Gallery',
-				req : req,
-				imageList : listImages()};
-	res.render('gallery', data);
-
+				req : req};
+	render(req, res, data);
 });
 
 app.post('/gallery', function(req, res, next){
@@ -58,6 +63,7 @@ app.post('/gallery', function(req, res, next){
 		var tmpPath = req.files.image.path;
 		var targetName = getTimestamp() + "-" + req.files.image.name;
 		var targetPath = 'public/images/' + targetName;
+		var resourcePath = '/images/' + targetName;
 		var title = req.body.title;
 		var desc = req.body.des;
 		
@@ -70,18 +76,17 @@ app.post('/gallery', function(req, res, next){
 			}
 			user_mgr.getIdByName(req.session.user, function(err, id){
 				if (err) console.log("getUserId: " + err);
-				var image_model = new image(title, id, targetPath, getDate(), desc);
+				var image_model = new image(title, id, resourcePath, getDate(), desc);
 				image_mgr.addImage(image_model, function(err, id){
 					var data = {title : 'Image Gallery',
-							req : req,
-							imageList : listImages()};
+								req : req};
 					if (err) {
 						data.error = 'Error adding image';
 						//TODO: remove uploaded image
 					} else {
 						data.success = 'File uploaded'
 					}
-					res.render('gallery', data);
+					render(req ,res, data);
 				});
 			});
 		});
@@ -89,9 +94,7 @@ app.post('/gallery', function(req, res, next){
 	} else {
 		var data = {title : 'Image Gallery',
 					req : req,
-					error : 'File missing or incorrect type',
-					imageList : listImages()};
-		res.render('gallery', data);
+					error : 'File missing or incorrect type'};
+		render(req, res, data);
 	}
-	
 });

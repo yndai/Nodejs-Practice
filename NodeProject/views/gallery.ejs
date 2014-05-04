@@ -40,8 +40,9 @@
 	<div class="gallery">
 	<% for (var i = 0; i < imageList.length; i++){ %>		
 	    <div class="galleryItem">
-	        <a href="<%= imageList[i] %>"><img src="<%= imageList[i] %>" alt=""></a>
-	        <h3>Title</h3>
+	        <a href="<%= imageList[i].source %>"><img src="<%= imageList[i].source %>" alt="<%= imageList[i].name %>"></a>
+	        <h3><%= imageList[i].name %></h3>
+	        <p><%= imageList[i].description %></p>
 	    </div>
 	<% } %>
 	</div>
