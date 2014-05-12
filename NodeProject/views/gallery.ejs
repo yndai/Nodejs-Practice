@@ -5,7 +5,7 @@
 	<form action="/gallery" name="imgForm" method="post" enctype="multipart/form-data" onsubmit="return validate();">
 		<fieldset>
 		<legend>Image Upload</legend>
-			<div class="grid-12">
+			<div class="grid-12 equalize">
 			
 			<div class="span-2">
 				<label for="title">Title</label>
@@ -20,7 +20,7 @@
 				<textarea id="des" rows="1" cols="30" name="des" ></textarea>
 			</div>
 			<div class="span-1">
-				<input type="submit" value="Upload" />
+				<input type="submit" style="margin-top: 25px;" value="Upload" />
 			</div>
 			<div class="clear"></div>
 			
@@ -43,6 +43,7 @@
 	        <a href="<%= imageList[i].source %>"><img src="<%= imageList[i].source %>" alt="<%= imageList[i].name %>"></a>
 	        <h3><%= imageList[i].name %></h3>
 	        <p><%= imageList[i].description %></p>
+	        <p><i>Submitted by: </i></i><b><%= imageList[i].user %></b></p>
 	    </div>
 	<% } %>
 	</div>

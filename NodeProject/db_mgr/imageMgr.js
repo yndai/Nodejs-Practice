@@ -5,6 +5,7 @@ var mysql = require('mysql');
 // SQL queries
 var IMAGE_INSERT_QUERY = 'INSERT INTO Images (name,user,source,date,description) VALUES (?, ?, ?, ?, ?)';
 var IMAGE_LIST_QUERY = 'SELECT * FROM Images ORDER BY name ASC LIMIT 0,18446744073709551615';
+var IMAGE_USER_LIST_QUERY = 'SELECT i.name, i.source, i.date, i.description, u.name as user FROM Images i LEFT JOIN Users u ON i.user = u.id;'
 
 //TODO: add update functionality?
 function addImage(image, callback){
@@ -34,7 +35,7 @@ function listImages(callback){
 		if (err) console.log ('Get Connection Error: ' + err);
 	
 		var queryAttrs = [];
-		var q = cxn.query(IMAGE_LIST_QUERY, queryAttrs, function(err, rows) {
+		var q = cxn.query(IMAGE_USER_LIST_QUERY, queryAttrs, function(err, rows) {
 			if (err) {
 				console.log('DB Error: ' + err);
 				callback(err);
